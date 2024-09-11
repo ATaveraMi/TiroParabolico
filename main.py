@@ -9,6 +9,7 @@ Exercises
 """
 
 from random import randrange
+from turtle import hideturtle,done, onscreenclick, ontimer, up, goto
 from turtle import *
 
 from freegames import vector
@@ -23,8 +24,8 @@ def tap(x, y):
     if not inside(ball):
         ball.x = -199
         ball.y = -199
-        speed.x = (x + 200) / 25
-        speed.y = (y + 200) / 25
+        speed.x = (x + 200) / 10 # se incrementa la velocidad bajando el divisor
+        speed.y = (y + 200) / 10
 
 
 def inside(xy):
@@ -55,7 +56,7 @@ def move():
         targets.append(target)
 
     for target in targets:
-        target.x -= 0.5
+        target.x -= 2 # Se aumenta la velocidad de los objetos targets
 
     if inside(ball):
         speed.y -= 0.35
@@ -74,7 +75,7 @@ def move():
         if not inside(target):
             return
 
-    ontimer(move, 50)
+    ontimer(move, 25) # de 50 a 25 para hacer el movimiento más rápido
 
 
 setup(420, 420, 370, 0)

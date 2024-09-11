@@ -9,7 +9,7 @@ Exercises
 """
 
 from random import randrange
-from turtle import hideturtle,done, onscreenclick, ontimer, up, goto
+from turtle import hideturtle, done, onscreenclick, ontimer, up, goto
 from turtle import *
 
 from freegames import vector
@@ -18,20 +18,17 @@ ball = vector(-200, -200)
 speed = vector(0, 0)
 targets = []
 
-
 def tap(x, y):
     """Respond to screen tap."""
     if not inside(ball):
         ball.x = -199
         ball.y = -199
-        speed.x = (x + 200) / 10 # se incrementa la velocidad bajando el divisor
+        speed.x = (x + 200) / 10  # Increase speed by lowering the divisor
         speed.y = (y + 200) / 10
-
 
 def inside(xy):
     """Return True if xy within screen."""
     return -200 < xy.x < 200 and -200 < xy.y < 200
-
 
 def draw():
     """Draw ball and targets."""
@@ -47,7 +44,6 @@ def draw():
 
     update()
 
-
 def move():
     """Move ball and targets."""
     if randrange(40) == 0:
@@ -56,11 +52,17 @@ def move():
         targets.append(target)
 
     for target in targets:
-        target.x -= 2 # Se aumenta la velocidad de los objetos targets
+        target.x -= 2  
 
     if inside(ball):
         speed.y -= 0.35
         ball.move(speed)
+    else:
+        #Reposicionar
+        ball.x = -199
+        ball.y = -199
+        speed.x = 0
+        speed.y = 0
 
     dupe = targets.copy()
     targets.clear()
@@ -68,14 +70,11 @@ def move():
     for target in dupe:
         if abs(target - ball) > 13:
             targets.append(target)
-
+    #Borré una función
     draw()
 
-    for target in targets:
-        if not inside(target):
-            return
-
-    ontimer(move, 25) # de 50 a 25 para hacer el movimiento más rápido
+    
+    ontimer(move, 25)  # de 50 a 25 para hacer el movimiento más rápido
 
 
 setup(420, 420, 370, 0)
